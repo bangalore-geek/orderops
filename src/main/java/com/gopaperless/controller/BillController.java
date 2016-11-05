@@ -17,7 +17,7 @@ public class BillController {
 	@Autowired
 	private BillService service;
 
-	@RequestMapping("/home")
+	@RequestMapping("/")
 	public String home(Model model) {
 		model.addAttribute("bills", service.findAll());
 		return "home";
