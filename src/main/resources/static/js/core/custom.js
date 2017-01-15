@@ -71,7 +71,7 @@ $(window).resize(function () {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
-/** ******  /tooltip  *********************** **/
+/** ******  /tooltip  *********************** **/zzz
 /** ******  progressbar  *********************** **/
 if ($(".progress .progress-bar")[0]) {
     $('.progress .progress-bar').progressbar(); // bootstrap 3

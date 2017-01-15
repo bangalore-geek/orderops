@@ -1,0 +1,146 @@
+package com.gopaperless.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tblaccessrights")
+public class AccessRights {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "tblaccessrights_cid_gen")
+	@SequenceGenerator(name = "tblaccessrights_cid_gen", sequenceName = "tblaccessrights_cid_seq")
+	@Column(name = "cid")
+	private Integer id;
+
+	private Integer parentid;
+
+	private String description;
+
+	private String code;
+
+	private boolean enabled;
+
+	@Column(name = "itemorder")
+	private String itemOrder;
+
+	@Column(name = "servicecode")
+	private String serviceCode;
+
+	@Column(name = "isold")
+	private boolean isOld;
+
+	@Column(name = "isprivate")
+	private boolean isPrivate;
+
+	@Column(name = "isadmin")
+	private boolean isAdmin;
+
+	@Column(name = "isemployee")
+	private boolean isEmployee;
+
+	@Column(name = "ismanager")
+	private boolean isManager;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getParentid() {
+		return parentid;
+	}
+
+	public void setParentid(Integer parentid) {
+		this.parentid = parentid;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getItemOrder() {
+		return itemOrder;
+	}
+
+	public void setItemOrder(String itemOrder) {
+		this.itemOrder = itemOrder;
+	}
+
+	public String getServiceCode() {
+		return serviceCode;
+	}
+
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
+
+	public boolean isOld() {
+		return isOld;
+	}
+
+	public void setOld(boolean isOld) {
+		this.isOld = isOld;
+	}
+
+	public boolean isPrivate() {
+		return isPrivate;
+	}
+
+	public void setPrivate(boolean isPrivate) {
+		this.isPrivate = isPrivate;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public boolean isEmployee() {
+		return isEmployee;
+	}
+
+	public void setEmployee(boolean isEmployee) {
+		this.isEmployee = isEmployee;
+	}
+
+	public boolean isManager() {
+		return isManager;
+	}
+
+	public void setManager(boolean isManager) {
+		this.isManager = isManager;
+	}
+
+}

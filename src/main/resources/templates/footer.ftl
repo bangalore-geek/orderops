@@ -14,6 +14,7 @@
 <script src="js/core/main.js"></script>
 <script src="js/core/ui-bootstrap-tpls-0.12.1.min.js"></script>
 <script src="js/core/angular-animate.min.js"></script>
+<!--<script src="js/core/custom.js"></script>-->
 <script src="js/plugin/toastr.js"></script>
 <script src="js/plugin/jqplot/jquery.jqplot.js"></script>
 <script src="js/plugin/jqplot/jqplot.pieRenderer.js"></script>
