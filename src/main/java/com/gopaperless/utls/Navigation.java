@@ -21,8 +21,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ReflectionUtils;
 
 @Repository
-public class Navigation implements BeanPostProcessor,
-		ApplicationListener<ContextRefreshedEvent>, ApplicationContextAware {
+public class Navigation
+		implements BeanPostProcessor, ApplicationListener<ContextRefreshedEvent>, ApplicationContextAware {
 	private ApplicationContext applicationContext;
 
 	private Map<String, NavEntry> navigations = new HashMap<String, NavEntry>();
@@ -34,8 +34,7 @@ public class Navigation implements BeanPostProcessor,
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext arg0)
-			throws BeansException {
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
 		this.applicationContext = applicationContext;
 
 	}
@@ -54,15 +53,13 @@ public class Navigation implements BeanPostProcessor,
 	}
 
 	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName)
-			throws BeansException {
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		Class<? extends Object> clazz = bean.getClass();
 		if (org.springframework.aop.SpringProxy.class.isAssignableFrom(clazz)) {
 			clazz = clazz.getSuperclass();
 		}
 		if (clazz.isAnnotationPresent(Controller.class)) {
-			Method[] declaredMethods = ReflectionUtils
-					.getAllDeclaredMethods(clazz);
+			Method[] declaredMethods = ReflectionUtils.getAllDeclaredMethods(clazz);
 			for (Method method : declaredMethods) {
 
 				if (method.isAnnotationPresent(Menu.class)) {
@@ -73,6 +70,7 @@ public class Navigation implements BeanPostProcessor,
 					navEntry.setOrder(menu.order());
 					navEntry.setUrl(menu.url());
 					navEntry.setVisible(menu.visible());
+					navEntry.setParent(menu.parent());
 					navigations.put(menu.accessCode(), navEntry);
 				}
 			}
@@ -81,8 +79,7 @@ public class Navigation implements BeanPostProcessor,
 	}
 
 	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName)
-			throws BeansException {
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
 
@@ -91,20 +88,33 @@ public class Navigation implements BeanPostProcessor,
 	}
 
 	public List<NavEntry> displayMenuList() {
-		UserDetails userDetails = (UserDetails) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		@SuppressWarnings("unchecked")
-		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) userDetails
-				.getAuthorities();
+		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) userDetails.getAuthorities();
 		Map<String, NavEntry> allowAccessList = getMenuList();
 		List<NavEntry> navigationEntries = new ArrayList<NavEntry>();
 		for (GrantedAuthority grantedAuthority : authorities) {
 			if (allowAccessList.get(grantedAuthority.getAuthority()) != null) {
-				navigationEntries.add(allowAccessList.get(grantedAuthority
-						.getAuthority()));
+				navigationEntries.add(allowAccessList.get(grantedAuthority.getAuthority()));
 			}
 		}
 		return navigationEntries;
+	}
+
+	public Map<String, List<NavEntry>> getMenu() {
+		Map<String, List<NavEntry>> map = new HashMap<String, List<NavEntry>>();
+		List<NavEntry> list = displayMenuList();
+		for (NavEntry navEntry : list) {
+			if (navEntry.getParent().equals("root")) {
+				map.put(navEntry.getTitle(), new ArrayList<NavEntry>());
+			}
+		}
+		for (NavEntry navEntry : list) {
+			if (map.containsKey(navEntry.getParent())) {
+				map.get(navEntry.getParent()).add(navEntry);
+			}
+		}
+		return map;
 	}
 
 	public class NavEntry {
@@ -113,6 +123,7 @@ public class Navigation implements BeanPostProcessor,
 		private int order;
 		private String url;
 		private boolean visible;
+		private String parent;
 
 		public int getOrder() {
 			return order;
@@ -152,6 +163,14 @@ public class Navigation implements BeanPostProcessor,
 
 		public void setVisible(boolean visible) {
 			this.visible = visible;
+		}
+
+		public String getParent() {
+			return parent;
+		}
+
+		public void setParent(String parent) {
+			this.parent = parent;
 		}
 
 	}

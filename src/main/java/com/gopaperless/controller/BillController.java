@@ -27,7 +27,7 @@ public class BillController {
 		Map<String, Object> data = new HashMap<>();
 		User loggedInUser = utils.getLoggedInUser();
 		data.put("user", loggedInUser);
-		data.put("menus", navigation.displayMenuList());
+		data.put("menus", navigation.getMenu());		
 		return new ModelAndView("home", data);
 	}
 

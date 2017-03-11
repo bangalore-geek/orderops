@@ -18,4 +18,6 @@ public @interface Menu {
 	String title();
 	
 	String url();
+	
+	String parent();
 }
