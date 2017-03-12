@@ -1,14 +1,22 @@
 package com.gopaperless;
 
+import javax.servlet.Filter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
+import com.gopaperless.config.multitanent.MultiTenantFilter;
+
 @SpringBootApplication
-@EnableJpaRepositories
 public class GopaperlessApplication {
+	
+	@Autowired
+    AutowireCapableBeanFactory beanFactory;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GopaperlessApplication.class, args);
@@ -18,4 +26,14 @@ public class GopaperlessApplication {
 	public HibernateJpaSessionFactoryBean sessionFactory() {
 		return new HibernateJpaSessionFactoryBean();
 	}
+	
+	@Bean
+    public FilterRegistrationBean myFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        Filter tenantFilter = new MultiTenantFilter();
+        beanFactory.autowireBean(tenantFilter);
+        registration.setFilter(tenantFilter);
+        registration.addUrlPatterns("/*");
+        return registration;
+    }
 }

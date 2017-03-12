@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -20,11 +19,8 @@ public class UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
 	private Session openSession() {
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 	@SuppressWarnings("unchecked")
