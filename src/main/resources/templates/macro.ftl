@@ -69,7 +69,7 @@
 									   <li><a><i class="fa fa-home"></i> ${prop} <span class="fa fa-chevron-down"></span></a>
 		                                    <ul class="nav child_menu" style="display: none">
 		                                    	<#list menus[prop] as navEntry>
-		                                    		<li><a href="index.html">${navEntry.title}</a></li>
+		                                    		<li><a href="${navEntry.url}">${navEntry.title}</a></li>
 		                            			</#list>        	
 		                                    </ul>
                                 		</li>

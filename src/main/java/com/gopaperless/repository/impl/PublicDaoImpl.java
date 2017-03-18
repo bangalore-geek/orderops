@@ -24,7 +24,6 @@ public class PublicDaoImpl implements PublicDao {
 		return sessionFactory.getCurrentSession().createCriteria(clazz).list();
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T getObject(Class<T> clazz, Serializable id) {
 		return (T) sessionFactory.getCurrentSession().load(clazz, id);
 	}
@@ -38,13 +37,11 @@ public class PublicDaoImpl implements PublicDao {
 	 * 
 	 * @see folklore.dao.DAO#removeObject(java.lang.Class, java.io.Serializable)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void removeObject(Class clazz, Serializable id) {
-		sessionFactory.getCurrentSession().delete(
-				sessionFactory.getCurrentSession().load(clazz, id));
+		sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().load(clazz, id));
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T getObjectOrNull(Class<T> clazz, Serializable id) {
 		return (T) sessionFactory.getCurrentSession().get(clazz, id);
 	}

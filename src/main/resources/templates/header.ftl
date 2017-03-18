@@ -3,8 +3,6 @@
 	 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
      <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-     <link rel="stylesheet" type="text/css" href="css/toastr.css">
-     <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css">
      <link rel="stylesheet" type="text/css" href="css/angular-wizard.min.css">
      
      <link rel="stylesheet" type="text/css" href="css/animate.min.css">
@@ -12,7 +10,7 @@
      <link rel="stylesheet" type="text/css" href="css/floatexamples.css">
      <link rel="stylesheet" type="text/css" href="css/normalize.css">
      <link rel="stylesheet" type="text/css" href="css/nprogress.css">
-     <link rel="stylesheet" type="text/css" href="css/icheck/flat/green.css">
+     
      
 	 <div class="top_nav">
 

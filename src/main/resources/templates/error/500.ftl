@@ -4,9 +4,8 @@
 <div class="col-md-12">
     <div class="col-middle">
         <div class="text-center text-center">
-            <h1 class="error-number">403</h1>
-            <h2>Sorry you do not have permission to access the resources</h2>
-            <p>ACCESS DENIED !</p>
+            <h1 class="error-number">500</h1>
+            <h2>Oops something went wrong please try again later</h2>
         </div>
     </div>
 </div>

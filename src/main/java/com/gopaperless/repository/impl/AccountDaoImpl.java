@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.gopaperless.model.AccountInfo;
@@ -18,9 +17,6 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
 	private Session openSession() {
 		return sessionFactory.withOptions().tenantIdentifier("public").openSession();

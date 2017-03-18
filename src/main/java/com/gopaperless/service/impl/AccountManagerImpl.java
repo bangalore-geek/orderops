@@ -3,6 +3,7 @@ package com.gopaperless.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.gopaperless.model.AccountInfo;
@@ -11,7 +12,7 @@ import com.gopaperless.service.AccountManager;
 
 @Service
 public class AccountManagerImpl implements AccountManager {
-	
+
 	@Autowired
 	private AccountDao accountDao;
 
@@ -28,6 +29,7 @@ public class AccountManagerImpl implements AccountManager {
 	}
 
 	@Override
+	@Cacheable(value = "tenants", key = "#accountCode")
 	public AccountInfo getAccountInfo(String accountCode) {
 		return accountDao.getAccountInfoForDomain(accountCode);
 	}
