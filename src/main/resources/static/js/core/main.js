@@ -1,5 +1,4 @@
-var defysope = angular.module('defysope', ['ui.bootstrap', 'ngAnimate',
-				'mgo-angular-wizard']);
+var defysope = angular.module('defysope', ['ui.bootstrap', 'ngAnimate']);
 
 /* user define directives */
 defysope.directive('skwindow', function() {

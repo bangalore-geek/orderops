@@ -55,6 +55,9 @@ public class User implements Serializable {
 
 	@Column(name = "modifieddate")
 	private Date modifiedDate;
+	
+	@Column(name = "createddate")
+	private Date createdDate;
 
 	public String getName() {
 		return name;
@@ -141,4 +144,14 @@ public class User implements Serializable {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	
 }

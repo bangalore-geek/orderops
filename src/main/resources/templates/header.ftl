@@ -2,8 +2,7 @@
 	<title>myHELPER</title>
 	 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-     <link rel="stylesheet" type="text/css" href="css/angular-wizard.min.css">
+     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
      
      <link rel="stylesheet" type="text/css" href="css/animate.min.css">
      <link rel="stylesheet" type="text/css" href="css/custom.css">

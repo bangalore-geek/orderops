@@ -13,13 +13,12 @@
                 </div>
                 <div class="x_content">
                     <br />
-                    <form name="form1" class="form-horizontal form-label-left" ng-submit="submitForm()" novalidate>
+                    <form name="form1" class="form-horizontal form-label-left">
 
-                        <div class="form-group" ng-class="{ 'has-error' : company.companyName.$invalid && !company.companyName.$pristine }">
+                        <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="companyName">Company Name</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="companyName" ng-model="company.companyName" class="form-control col-md-7 col-xs-12" required>{{company.companyName.$invalid}}--{{company.companyName.$pristine}}
-                                <p ng-show="company.companyName.$invalid && !company.companyName.$pristine" class="help-block">Company name is required.</p>
+                                <input type="text" name="companyName" ng-model="company.companyName" class="form-control col-md-7 col-xs-12" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,7 +67,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary">Cancel</button>
-                                <button type="submit" class="btn btn-success" ng-disabled="company.$invalid">Submit-{{company.$invalid}}</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>
 

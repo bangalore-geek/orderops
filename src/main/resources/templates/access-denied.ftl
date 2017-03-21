@@ -5,8 +5,8 @@
     <div class="col-middle">
         <div class="text-center text-center">
             <h1 class="error-number">403</h1>
-            <h2>Sorry you do not have permission to access the resources</h2>
-            <p>ACCESS DENIED !</p>
+            <h2>Access denied</h2>
+            <p>Full authentication is required to access this resource</p>
         </div>
     </div>
 </div>
