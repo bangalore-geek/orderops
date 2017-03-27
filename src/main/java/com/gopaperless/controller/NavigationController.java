@@ -71,7 +71,7 @@ public class NavigationController {
 	@Secured("ROLE_DF_CREATE_USER")
 	public ModelAndView eight(Model model) {
 		Map<String, Object> data = new HashMap<String, Object>();
-		return new ModelAndView("create-user", data);
+		return new ModelAndView("create-users", data);
 	}
 
 	@Menu(parent = "UserAdminstration", title = "Create Roles", url = "/create-roles", accessCode = "ROLE_DF_CREATE_ROLES", order = 1, visible = false)

@@ -17,13 +17,13 @@ import com.gopaperless.config.multitanent.MultiTenantFilter;
 
 @SpringBootApplication
 @EnableCaching
-public class GopaperlessApplication {
+public class Application {
 
 	@Autowired
 	AutowireCapableBeanFactory beanFactory;
 
 	public static void main(String[] args) {
-		SpringApplication.run(GopaperlessApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean

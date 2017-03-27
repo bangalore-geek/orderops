@@ -1,13 +1,14 @@
 defysope.controller('CompanyProfileCtrl', [ '$scope', '$http', function($scope, $http) {
 
-	
+
 	$scope.company = {};
-	
-	$scope.submitForm = function() {
-		if ($scope.form1.$valid) {
-			alert('our form is amazing');
-		}
+
+	$scope.save = function() {
+		console.log('save called')
+		$http.get("/save-user").then(function(res) {
+			console.log(res);
+		})
 
 	};
-	
+
 } ]);

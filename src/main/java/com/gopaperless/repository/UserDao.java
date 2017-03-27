@@ -3,9 +3,12 @@ package com.gopaperless.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,5 +44,26 @@ public class UserDao {
 				&& authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User)
 						? (org.springframework.security.core.userdetails.User) authentication.getPrincipal() : null;
 		return authuser == null ? null : getUser(authuser.getUsername());
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getUsers() {
+		Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
+		return (List<User>) criteria.list();
+	}
+
+	public void save(User user) {
+		Session session = openSession();
+		Transaction transaction = session.beginTransaction();
+		transaction.begin();
+		session.saveOrUpdate(user);
+		transaction.commit();
+		session.close();
+	}
+
+	public User getUserById(int userId) {
+		Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("id", userId));
+		return (User) criteria.uniqueResult();
 	}
 }

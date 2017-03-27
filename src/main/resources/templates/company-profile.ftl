@@ -6,9 +6,9 @@
 <div ng-controller="CompanyProfileCtrl">
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
+            <div class="x_panel" style="border-top:5px solid red;">
                 <div class="x_title">
-                    <h4>Basic Details</h4>
+                    <h4>Basic Details<span class="pull-right edit_hover_class" style="cursor:pointer;"><i class="fa fa-pencil" aria-hidden="true"></i></span></h4>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -66,8 +66,8 @@
                         <div class="ln_solid"></div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <button type="submit" class="btn btn-primary">Cancel</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-primary">Cancel</button>
+                                <button type="button" class="btn btn-success" ng-click="save()">Submit</button>
                             </div>
                         </div>
 
@@ -77,7 +77,7 @@
         </div>
         
         <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
+            <div class="x_panel" style="border-top:5px solid green;">
                 <div class="x_title">
                     <h4>Contact Details</h4>
                     <div class="clearfix"></div>

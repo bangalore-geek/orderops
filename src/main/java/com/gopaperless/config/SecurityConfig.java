@@ -24,10 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/resources/**").permitAll().anyRequest().fullyAuthenticated().and()
-				.formLogin().loginPage("/login").failureUrl("/login?error=1").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").and()
-				.exceptionHandling().accessDeniedPage("/403");
+		http.csrf().disable().authorizeRequests().antMatchers("/resources/**").permitAll().anyRequest()
+				.fullyAuthenticated().and().formLogin().loginPage("/login").failureUrl("/login?error=1").permitAll()
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+				.and().exceptionHandling().accessDeniedPage("/403");
 	}
 
 	@Autowired
