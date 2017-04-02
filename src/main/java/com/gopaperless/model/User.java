@@ -59,6 +59,11 @@ public class User implements Serializable {
 	@Column(name = "createddate")
 	private Date createdDate;
 
+	
+	@Column(name = "active")
+	private boolean active;
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -151,6 +156,14 @@ public class User implements Serializable {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

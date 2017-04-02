@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gopaperless.model.User;
 import com.gopaperless.service.ApplicationUtilsService;
+import com.gopaperless.service.UserService;
 import com.gopaperless.utls.Menu;
 import com.gopaperless.utls.Navigation;
 
@@ -25,6 +26,9 @@ public class NavigationController {
 
 	@Autowired
 	private Navigation navigation;
+	
+	@Autowired
+	private UserService userService;
 
 
 	@Menu(parent = "root", title = "Company", url = "", accessCode = "ROLE_DF_COMPANY_MENU", order = 1, visible = false)
@@ -71,6 +75,9 @@ public class NavigationController {
 	@Secured("ROLE_DF_CREATE_USER")
 	public ModelAndView eight(Model model) {
 		Map<String, Object> data = new HashMap<String, Object>();
+		User loggedInUser = utils.getLoggedInUser();
+		data.put("user", loggedInUser);
+		data.put("menus", navigation.getMenu());
 		return new ModelAndView("create-users", data);
 	}
 
