@@ -16,10 +16,12 @@ import org.springframework.stereotype.Repository;
 
 import com.gopaperless.bean.UserProfileBean;
 import com.gopaperless.model.Address;
+import com.gopaperless.model.Email;
 import com.gopaperless.model.EmployeeManager;
 import com.gopaperless.model.User;
 import com.gopaperless.model.UserProfile;
 import com.gopaperless.model.UserRoles;
+import com.gopaperless.service.MailService;
 import com.gopaperless.utls.AppUtils;
 
 @Repository
@@ -27,6 +29,9 @@ public class UserDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private MailService mailService;
 
 	private Session openSession() {
 		return sessionFactory.openSession();
@@ -72,71 +77,77 @@ public class UserDao {
 		criteria.add(Restrictions.eq("id", userId));
 		return (User) criteria.uniqueResult();
 	}
-	
+
 	public UserProfile getUserProfileById(int userId) {
 		Criteria criteria = sessionFactory.openSession().createCriteria(UserProfile.class);
 		criteria.add(Restrictions.eq("userId", userId));
 		return (UserProfile) criteria.uniqueResult();
 	}
-	
+
 	public Address getUserAddressById(int userId) {
 		Criteria criteria = sessionFactory.openSession().createCriteria(Address.class);
 		criteria.add(Restrictions.eq("userId", userId));
 		return (Address) criteria.uniqueResult();
 	}
-	
-	public void saveUserDetails(UserProfileBean userProfileBean){
+
+	public void saveUserDetails(UserProfileBean userProfileBean) {
 		// user
 		User thisUser = new User();
 		thisUser.setUserName(userProfileBean.getUserName());
 		thisUser.setEmail(userProfileBean.getEmail());
 		thisUser.setName(userProfileBean.getFirstName());
 		String unEncryptPass = AppUtils.getRandorPassword(userProfileBean.getFirstName());
-		
-		System.out.println("unEncryptPass >>>>>>>>>>>>>>> "+unEncryptPass);
-		
 		thisUser.setPassword(AppUtils.encryptPassword(unEncryptPass));
 		thisUser.setBriefcasePassword(AppUtils.encryptPassword(unEncryptPass));
-		
+
 		// user profile
 		UserProfile thisUserProfile = new UserProfile();
 		thisUserProfile.setFirstName(userProfileBean.getFirstName());
 		thisUserProfile.setLastName(userProfileBean.getLastName());
 		thisUserProfile.setUserId(thisUser.getId());
-		
+
 		// manager
 		EmployeeManager thisEmployeeManager = new EmployeeManager();
 		thisEmployeeManager.setManagerId(userProfileBean.getSalesManagerId());
-		
+
 		// address
 		Address address = new Address();
 		address.setEmail(userProfileBean.getEmail());
-		
-		//role mapping 
+
+		// role mapping
 		UserRoles roles = new UserRoles();
-		
+
 		Session session = openSession();
-		
+
 		Transaction transaction = session.beginTransaction();
 		transaction.begin();
-			session.saveOrUpdate(thisUser);
-			
-			roles.setUserId(thisUser.getId());
-			roles.setRoleId(userProfileBean.getRoleId());
-			session.saveOrUpdate(roles);
-			
-			address.setUserId(thisUser.getId());
-			session.saveOrUpdate(address);
-			
-			thisUserProfile.setUserId(thisUser.getId());
-			thisUserProfile.setAddress(address.getId());
-			
-			session.saveOrUpdate(thisUserProfile);
-			
-			thisEmployeeManager.setUserId(new Long(thisUser.getId()));
-			session.saveOrUpdate(thisEmployeeManager);
+		session.saveOrUpdate(thisUser);
+
+		roles.setUserId(thisUser.getId());
+		roles.setRoleId(userProfileBean.getRoleId());
+		session.saveOrUpdate(roles);
+
+		address.setUserId(thisUser.getId());
+		session.saveOrUpdate(address);
+
+		thisUserProfile.setUserId(thisUser.getId());
+		thisUserProfile.setAddress(address.getId());
+
+		session.saveOrUpdate(thisUserProfile);
+
+		thisEmployeeManager.setUserId(new Long(thisUser.getId()));
+		session.saveOrUpdate(thisEmployeeManager);
+
 		transaction.commit();
 		session.close();
+
+		Email thisEmail = new Email();
+		thisEmail.setTo(userProfileBean.getEmail());
+		thisEmail.setSubject("Welcome to OrderOPS");
+		thisEmail.setBody("<BR>Welcome " + userProfileBean.getFirstName()
+				+ ",<BR><P>Please find your password below to login to OrderOPS</P><BR><P>Passowrd : " + unEncryptPass);
+		mailService.sendEmail(thisEmail);
+
 	}
-	
+
 }

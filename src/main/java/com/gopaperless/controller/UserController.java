@@ -2,7 +2,9 @@ package com.gopaperless.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,20 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.gopaperless.bean.UserProfileBean;
-import com.gopaperless.model.Address;
 import com.gopaperless.model.User;
 import com.gopaperless.model.UserProfile;
-import com.gopaperless.service.MailService;
 import com.gopaperless.service.UserService;
 
 @RestController
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
-	@Autowired 
-	private MailService mailService;
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	@Secured("ROLE_DF_CREATE_USER")
@@ -33,7 +31,7 @@ public class UserController {
 		model.put("users", userService.getUsers());
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
 	@Secured("ROLE_DF_CREATE_USER")
 	public @ResponseBody Object loadRoles(HttpServletRequest request) {
@@ -56,8 +54,6 @@ public class UserController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		User user = userService.getUserById(userId);
 		UserProfile userProfile = userService.getUserProfileById(userId);
-		Address userAddress = userService.getUserAddressById(userId);
-		
 		UserProfileBean userProfileBean = new UserProfileBean();
 		if (userProfile != null) {
 			userProfileBean.setFirstName(userProfile.getFirstName());

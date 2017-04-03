@@ -3803,3 +3803,11 @@ ul.notifications {
 .dataTables_wrapper > .row {
     overflow: auto !important;
 }
+
+.green-top-border{
+	border-top: 5px solid green;
+}
+
+.red-top-border{
+	border-top: 5px solid red;
+}

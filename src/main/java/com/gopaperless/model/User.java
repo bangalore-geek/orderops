@@ -27,7 +27,7 @@ public class User implements Serializable {
 	public static final int CORPORATE = 5;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "tbluser_cid_gen")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tbluser_cid_gen")
 	@SequenceGenerator(name = "tbluser_cid_gen", sequenceName = "tbluser_cid_seq")
 	@Column(name = "cid")
 	private int id;

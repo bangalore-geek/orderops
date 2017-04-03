@@ -10,39 +10,39 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbluserprofile") 
+@Table(name = "tbluserprofile")
 public class UserProfile {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cid", nullable = false)
 	private int id;
-	
+
 	@Column(name = "userid", nullable = false)
 	private int userId;
-	
+
 	@Column(name = "address", nullable = false)
 	private long address;
-	
-	@Column(name="firstName",nullable=false)
+
+	@Column(name = "firstName", nullable = false)
 	private String firstName;
-	
-	@Column(name="lastname",nullable=false)
+
+	@Column(name = "lastname", nullable = false)
 	private String lastName;
 
-	@Column(name="email",nullable=false)
+	@Column(name = "email", nullable = false)
 	private String email;
-	
-	@Column(name="phone",nullable=false)
+
+	@Column(name = "phone", nullable = false)
 	private String phone;
 
-	@Column(name="joindate",nullable=false)
+	@Column(name = "joindate", nullable = false)
 	private Timestamp joinDate;
-	
-	@Column(name="dob",nullable=false)
+
+	@Column(name = "dob", nullable = false)
 	private Timestamp dob;
-	
-	@Column(name="gender",nullable=false)
+
+	@Column(name = "gender", nullable = false)
 	private String gender;
 
 	public int getId() {
@@ -124,5 +124,5 @@ public class UserProfile {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
 }

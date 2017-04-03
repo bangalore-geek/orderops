@@ -1,4 +1,5 @@
 package com.gopaperless.service.impl;
+
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -12,8 +13,7 @@ import org.springframework.stereotype.Service;
 import com.gopaperless.model.Email;
 import com.gopaperless.service.MailService;
 
-
-@Service("mailService") 
+@Service("mailService")
 public class MailServiceImpl implements MailService {
 
 	@Autowired
@@ -30,12 +30,12 @@ public class MailServiceImpl implements MailService {
 			return false;
 		}
 	}
-	
+
 	private MimeMessagePreparator getMessagePreparator(final Email email) {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
-				mimeMessage.setText(email.getBody());
+				mimeMessage.setContent(email.getBody(), "text/html");
 				mimeMessage.setSubject(email.getSubject());
 			}
 		};

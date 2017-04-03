@@ -2,12 +2,12 @@
 
 <@macro.showHeader />
 
-<div class="row" ng-controller="createUsersCtrl">
-	<div class="col-md-12">
-		<div ng-if="!displayAddForm" class="col-md-1">
-			<button ng-click="addForm();"
-				class="form-control btn-primary pull-left">Add</button>
+<div ng-controller="createUsersCtrl">
+	
+		<div ng-if="!displayAddForm">
+			<button ng-click="addForm();" class="btn btn-default pull-right"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbspAdd User</button>
 		</div>
+		
 		<div ng-if="displayAddForm">
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div class="x_panel" style="border-top: 5px solid green;">
@@ -94,28 +94,24 @@
 
 
 		<div ng-if="!displayAddForm">
-
 			<div class="x_panel">
 				<div class="x_content">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 						</div>
 						<div class="clearfix"></div>
+						
 						<div class="col-md-4 col-sm-4 col-xs-12 profile_details" ng-repeat="x in users">
-							<div class="well profile_view">
+							<div class="well profile_view" ng-class="{'green-top-border': x.active, 'red-top-border': !x.active}">
 								<div class="col-sm-12">
-									<h4 class="brief">
-										<i>Users</i>
-									</h4>
 									<div class="left col-xs-7">
-										<h2>{{x.name}}</h2>
+										<h2><strong>{{x.name}}</strong></h2>
 										<p>
-											<strong>About: </strong> Web Designer / UX / Graphic Artist /
-											Coffee Lover
+											<strong>Role: </strong> {{x.role.description}}
 										</p>
 										<ul class="list-unstyled">
-											<li><i class="fa fa-building"></i> Address:</li>
-											<li><i class="fa fa-phone"></i> Phone #:</li>
+											<li><i class="fa fa-envelope" aria-hidden="true"></i> {{x.email}}</li>
+											<li>Active: {{x.active ? 'Yes' : 'No'}}</li>
 										</ul>
 									</div>
 									<div class="right col-xs-5 text-center">
@@ -125,19 +121,15 @@
 								</div>
 								<div class="col-xs-12 bottom text-center">
 									<div class="col-xs-12 col-sm-6 emphasis">
-										<p class="ratings">
-											<a>4.0</a> <a href="#"><span class="fa fa-star"></span></a> <a
-												href="#"><span class="fa fa-star"></span></a> <a href="#"><span
-												class="fa fa-star"></span></a> <a href="#"><span
-												class="fa fa-star"></span></a> <a href="#"><span
-												class="fa fa-star-o"></span></a>
-										</p>
+										<button ng-click="getUser(x.id)" class="btn btn-default btn-xs pull-left" type="button">
+											<i class="fa fa-pencil"> </i>
+										</button>
+										<button ng-click="getUser(x.id)" class="btn btn-default btn-xs pull-left" type="button">
+											<i class="fa fa-user"> </i> Manage Role
+										</button>
 									</div>
 									<div class="col-xs-12 col-sm-6 emphasis">
-										<button ng-click="getUser(x.id)" class="btn btn-success btn-xs" type="button">
-											<i class="fa fa-edit"> </i>
-										</button>
-										<button class="btn btn-primary btn-xs" type="button">
+										<button class="btn btn-default btn-xs pull-right" type="button">
 											<i class="fa fa-user"> </i> View Profile
 										</button>
 									</div>
@@ -148,7 +140,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 <@macro.showFooter>

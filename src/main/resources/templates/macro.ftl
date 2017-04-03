@@ -105,8 +105,7 @@
                     <div class="clearfix"></div>
                     <div class="row">
 
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" style="height:700px;">
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="height:700px;">
                             <#nested/>
                                 
                             
@@ -114,8 +113,7 @@
 
 <#macro showFooter>
 
-							</div>
-                        </div>
+						</div>
                     </div>
                 </div>
 
