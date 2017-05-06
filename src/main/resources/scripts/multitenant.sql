@@ -12,6 +12,12 @@ create table yogesh.tblstate (
 	countryid bigint REFERENCES yogesh.tblcountry(cid)
 );
 
+create table yogesh.password_reset_token (
+	cid serial PRIMARY KEY,
+	userid bigint REFERENCES yogesh.tbluser(cid),
+	token varchar(255) DEFAULT NULL
+);
+
 commit;
 create table yogesh.tblcity (
 	cid serial PRIMARY KEY,

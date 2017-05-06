@@ -18,6 +18,7 @@ import com.gopaperless.bean.UserProfileBean;
 import com.gopaperless.model.Address;
 import com.gopaperless.model.Email;
 import com.gopaperless.model.EmployeeManager;
+import com.gopaperless.model.PasswordResetToken;
 import com.gopaperless.model.User;
 import com.gopaperless.model.UserProfile;
 import com.gopaperless.model.UserRoles;
@@ -148,6 +149,26 @@ public class UserDao {
 				+ ",<BR><P>Please find your password below to login to OrderOPS</P><BR><P>Passowrd : " + unEncryptPass);
 		mailService.sendEmail(thisEmail);
 
+	}
+	
+	
+	public void saveToken(int userId, String token) {
+		PasswordResetToken passwordResetToken = new PasswordResetToken();
+		passwordResetToken.setToken(token);
+		passwordResetToken.setUserId(userId);
+		openSession().saveOrUpdate(passwordResetToken);
+	}
+
+	public PasswordResetToken getPasswordResetToken(int userId, String token) {
+		Criteria criteria = sessionFactory.openSession().createCriteria(PasswordResetToken.class);
+		criteria.add(Restrictions.eq("userId", userId));
+		return (PasswordResetToken) criteria.uniqueResult();
+	}
+	
+	public User getUserByEmail(String email) {
+		Criteria criteria = sessionFactory.openSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("email", email));
+		return (User) criteria.uniqueResult();
 	}
 
 }

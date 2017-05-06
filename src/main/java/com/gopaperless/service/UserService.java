@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gopaperless.bean.UserProfileBean;
 import com.gopaperless.model.Address;
+import com.gopaperless.model.PasswordResetToken;
 import com.gopaperless.model.Role;
 import com.gopaperless.model.User;
 import com.gopaperless.model.UserProfile;
@@ -25,4 +26,10 @@ public interface UserService {
 	public UserProfile getUserProfileById(int userId);
 	
 	public Address getUserAddressById(int userId);
+	
+	void saveToken(int userId, String token);
+	
+	PasswordResetToken getPasswordResetToken(int userId, String token);
+	
+	public User getUserByEmail(String email);
 }

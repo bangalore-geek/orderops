@@ -128,5 +128,19 @@ public class NavigationController {
 		Map<String, Object> data = new HashMap<String, Object>();
 		return new ModelAndView("lov", data);
 	}
+	
+	
+	@Menu(parent = "UserAdminstration", title = "My Profile", url = "/profile", accessCode = "ROLE_DF_CREATE_USER", order = 1, visible = false)
+	@RequestMapping("/profile")
+	@Secured("ROLE_DF_CREATE_USER")
+	public ModelAndView viewProfile(Model model) {
+		Map<String, Object> data = new HashMap<String, Object>();
+		User loggedInUser = utils.getLoggedInUser();
+		data.put("user", loggedInUser);
+		data.put("menus", navigation.getMenu());
+		return new ModelAndView("profile", data);
+	}
+	
+	
 
 }
